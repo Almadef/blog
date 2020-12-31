@@ -2,14 +2,33 @@ version: '3.7'
 services:
     nodejs:
         image: node:14-alpine
-        volumes:
+        volumes: 
             - .:/var/www/blog
-        ports:
+        ports: 
             - 3000:3000
-        networks:
+        networks: 
             - blog
         working_dir: /var/www/blog
         tty: true
         command: sh -c "yarn install & yarn run start:dev"
+    postgres:
+        build: ./docker/postgres
+        env_file: ./docker/postgres/.env
+        ports: 
+            - 127.0.0.1:5432:5432
+        volumes:
+            - ./docker/postgres/logs:/var/log/postgresql
+            - postgres-blog:/var/lib/postgresql/data
+        networks: 
+            - blog
+    pgadmin:
+        image: dpage/pgadmin4:4
+        env_file: ./docker/pgadmin/.env
+        ports: 
+            - 127.0.0.1:5050:5050
+        networks: 
+            - blog
 networks:
     blog:
+volumes:
+    postgres-blog:
