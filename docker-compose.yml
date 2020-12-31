@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+    nodejs:
+        image: node:14-alpine
+        volumes:
+            - .:/var/www/blog
+        ports:
+            - 3000:3000
+        networks:
+            - blog
+        working_dir: /var/www/blog
+        tty: true
+        command: sh -c "yarn install & yarn run start:dev"
+networks:
+    blog:
