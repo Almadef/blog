@@ -2,6 +2,52 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input categories_list_filter {
+  id: Int
+  title: String
+}
+
+input categories_list_sorting {
+  direction: SortingDirectionsEnum!
+  field: CategoriesListSortingFields!
+}
+
+input CategoriesListArgsDto {
+  filter: categories_list_filter
+
+  """Page to display"""
+  page: Int
+
+  """Count on page"""
+  pageSize: Int
+  sorting: categories_list_sorting
+}
+
+type CategoriesListDto {
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  items: [CategoryOneDto!]
+
+  """Current page number"""
+  page: Float
+
+  """Total pages"""
+  pageCount: Float
+
+  """Count elements on page"""
+  pageSize: Float
+
+  """Total elements"""
+  totalCount: Float
+}
+
+enum CategoriesListSortingFields {
+  created_at
+  id
+  title
+  updated_at
+}
+
 input CategoryCreateDto {
   title: String!
 }
@@ -29,6 +75,14 @@ type Mutation {
 type Query {
   """Get category by ID"""
   categoryById(categoryId: Float!): CategoryOneDto!
+
+  """Get paginate list categories"""
+  pageList(args: CategoriesListArgsDto!): CategoriesListDto!
+}
+
+enum SortingDirectionsEnum {
+  asc
+  desc
 }
 
 type StdResponseDto {

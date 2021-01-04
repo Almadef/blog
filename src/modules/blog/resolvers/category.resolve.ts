@@ -9,6 +9,9 @@ import { CategoryUpdateDto } from '../dto/input/category/category-update.dto';
 import { CategoryUpdateCommand } from '../commands/impl/category/category-update.command';
 import { CategoryDeleteCommand } from '../commands/impl/category/category-delete.command';
 import { StdResponseDto } from 'src/common/dto/std-response.dto';
+import { CategoriesListDto } from '../dto/output/category/categories-list.dto';
+import { CategoriesListArgsDto } from '../dto/input/category/categories-list-args.dto';
+import { CategoriesListQuery } from '../queries/impl/category/categories-list.query';
 
 @Resolver()
 export class CategoryResolver {
@@ -16,6 +19,13 @@ export class CategoryResolver {
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
   ) {}
+
+  @Query(() => CategoriesListDto, {
+    description: 'Get paginate list categories',
+  })
+  async pageList(@Args('args') args: CategoriesListArgsDto) {
+    return this.queryBus.execute(new CategoriesListQuery(args));
+  }
 
   @Query(() => CategoryOneDto, {
     description: 'Get category by ID',
