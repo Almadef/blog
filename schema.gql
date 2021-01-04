@@ -11,12 +11,27 @@ type CategoryOneDto {
   title: String!
 }
 
+input CategoryUpdateDto {
+  title: String!
+}
+
 type Mutation {
   """Create category"""
   categoryCreate(args: CategoryCreateDto!): CategoryOneDto!
+
+  """Delete category"""
+  categoryDelete(categoryId: Float!): StdResponseDto!
+
+  """Update category"""
+  categoryUpdate(args: CategoryUpdateDto!, categoryId: Float!): CategoryOneDto!
 }
 
 type Query {
   """Get category by ID"""
   categoryById(categoryId: Float!): CategoryOneDto!
+}
+
+type StdResponseDto {
+  message: String
+  result: Boolean!
 }
