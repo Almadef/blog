@@ -1,15 +1,14 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { PostgresConfigAbstract } from './postgres.config.abstract';
-import { PostgresConfigInterface } from './postgres.config.interface';
+import { ConfigBase } from './../../common/bases/config.base';
+import { ConfigInterface } from './../config.interface';
 
-class PostgresOrmConfig
-  extends PostgresConfigAbstract
-  implements PostgresConfigInterface {
+class PostgresOrmConfig extends ConfigBase implements ConfigInterface {
   constructor() {
     super();
   }
 
   public getConfig(): TypeOrmModuleOptions {
+    const entities = [__dirname + '/../../modules/**/*.entity{.ts,.js}'];
     return {
       type: 'postgres',
       host: this.getValue('POSTGRES_HOST'),
@@ -17,7 +16,7 @@ class PostgresOrmConfig
       username: this.getValue('POSTGRES_USER'),
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
-      entities: [],
+      entities: entities,
       ssl: this.isProduction(),
       synchronize: false,
     };

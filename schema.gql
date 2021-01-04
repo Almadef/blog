@@ -1,0 +1,22 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CategoryCreateDto {
+  title: String!
+}
+
+type CategoryOneDto {
+  id: Float!
+  title: String!
+}
+
+type Mutation {
+  """Create category"""
+  categoryCreate(args: CategoryCreateDto!): CategoryOneDto!
+}
+
+type Query {
+  """Get category by ID"""
+  categoryById(categoryId: Float!): CategoryOneDto!
+}

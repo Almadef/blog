@@ -20,10 +20,12 @@ export class category1609609756717 implements MigrationInterface {
             type: 'varchar',
             length: '50',
             isNullable: false,
+            isUnique: true,
           },
           {
             name: 'created_at',
             type: 'int',
+            unsigned: true,
             width: 11,
           },
           {

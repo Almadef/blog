@@ -1,10 +1,8 @@
 import { ConnectionOptions } from 'typeorm';
-import { PostgresConfigAbstract } from './postgres.config.abstract';
-import { PostgresConfigInterface } from './postgres.config.interface';
+import { ConfigBase } from './../../common/bases/config.base';
+import { ConfigInterface } from './../config.interface';
 
-class PostgresMigrationConfig
-  extends PostgresConfigAbstract
-  implements PostgresConfigInterface {
+class PostgresMigrationConfig extends ConfigBase implements ConfigInterface {
   constructor() {
     super();
   }
