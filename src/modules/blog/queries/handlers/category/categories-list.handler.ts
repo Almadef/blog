@@ -57,7 +57,6 @@ export class CategoriesListHandler
     queryBuilder: SelectQueryBuilder<CategoryEntity>,
     args: CategoriesListFilter,
   ) {
-    console.log(args);
     if (typeof args.id !== 'undefined') {
       queryBuilder.andWhere('category.id = :id', {
         id: args.id,

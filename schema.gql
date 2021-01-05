@@ -86,7 +86,13 @@ type Query {
   categoryById(categoryId: Float!): CategoryOneDto!
 
   """Get paginate list categories"""
-  pageList(args: CategoriesListArgsDto!): CategoriesListDto!
+  categoryList(args: CategoriesListArgsDto!): CategoriesListDto!
+
+  """Get tag by ID"""
+  tagById(tagId: Float!): TagOneDto!
+
+  """Get paginate list tags"""
+  tagList(args: TagsListArgsDto!): TagsListDto!
 }
 
 enum SortingDirectionsEnum {
@@ -106,6 +112,52 @@ input TagCreateDto {
 type TagOneDto {
   id: Float!
   title: String!
+}
+
+input tags_list_filter {
+  id: Int
+  title: String
+}
+
+input tags_list_sorting {
+  direction: SortingDirectionsEnum!
+  field: TagsListSortingFields!
+}
+
+input TagsListArgsDto {
+  filter: tags_list_filter
+
+  """Page to display"""
+  page: Int
+
+  """Count on page"""
+  pageSize: Int
+  sorting: tags_list_sorting
+}
+
+type TagsListDto {
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  items: [TagOneDto!]
+
+  """Current page number"""
+  page: Float
+
+  """Total pages"""
+  pageCount: Float
+
+  """Count elements on page"""
+  pageSize: Float
+
+  """Total elements"""
+  totalCount: Float
+}
+
+enum TagsListSortingFields {
+  created_at
+  id
+  title
+  updated_at
 }
 
 input TagUpdateDto {

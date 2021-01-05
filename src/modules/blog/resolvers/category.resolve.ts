@@ -23,7 +23,7 @@ export class CategoryResolver {
   @Query(() => CategoriesListDto, {
     description: 'Get paginate list categories',
   })
-  async pageList(@Args('args') args: CategoriesListArgsDto) {
+  async categoryList(@Args('args') args: CategoriesListArgsDto) {
     return this.queryBus.execute(new CategoriesListQuery(args));
   }
 
