@@ -70,6 +70,15 @@ type Mutation {
 
   """Update category"""
   categoryUpdate(args: CategoryUpdateDto!, categoryId: Float!): CategoryOneDto!
+
+  """Create tag"""
+  tagCreate(args: TagCreateDto!): TagOneDto!
+
+  """Delete tag"""
+  tagDelete(tagId: Float!): StdResponseDto!
+
+  """Update tag"""
+  tagUpdate(args: TagUpdateDto!, tagId: Float!): TagOneDto!
 }
 
 type Query {
@@ -88,4 +97,17 @@ enum SortingDirectionsEnum {
 type StdResponseDto {
   message: String
   result: Boolean!
+}
+
+input TagCreateDto {
+  title: String!
+}
+
+type TagOneDto {
+  id: Float!
+  title: String!
+}
+
+input TagUpdateDto {
+  title: String!
 }
