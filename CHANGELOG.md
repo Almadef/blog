@@ -1,3 +1,11 @@
+## 0.2.0 
+* Add categories and tags models;
+* Write GraphQL API (CRUD) use SQRS pattern.
+
+[Issue](https://github.com/Almadef/blog/issues/3)
+
+[Pull Request](https://github.com/Almadef/blog/pull/4)
+
 ## 0.1.0 
 * Add to docker-compose PostgresSQL;
 * Include the package TypeORM with migration. 

@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 
-export abstract class PostgresConfigAbstract {
+export abstract class ConfigBase {
   protected constructor() {
     dotenv.config({
       path: '.env',
@@ -20,7 +20,7 @@ export abstract class PostgresConfigAbstract {
     return value;
   }
 
-  protected isProduction() {
+  public isProduction() {
     const mode = this.getValue('MODE');
     return mode !== 'DEV';
   }
