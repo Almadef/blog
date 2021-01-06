@@ -28,7 +28,19 @@ services:
             - 127.0.0.1:5050:5050
         networks: 
             - blog
+    minio:
+        image: minio/minio:RELEASE.2021-01-05T05-22-38Z
+        env_file: ./docker/minio/.env
+        ports:
+            - 127.0.0.1:9000:9000
+        volumes:
+            - minio-blog:/export
+        networks: 
+            - blog
+        entrypoint: sh
+        command: -c 'mkdir -p /export/${MINIO_BUCKET} && /usr/bin/minio server /export'
 networks:
     blog:
 volumes:
     postgres-blog:
+    minio-blog:
