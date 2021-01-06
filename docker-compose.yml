@@ -37,7 +37,8 @@ services:
             - minio-blog:/export
         networks: 
             - blog
-        command: server --address 0.0.0.0:9000 /data
+        entrypoint: sh
+        command: -c 'mkdir -p /export/${MINIO_BUCKET} && /usr/bin/minio server /export'
 networks:
     blog:
 volumes:
