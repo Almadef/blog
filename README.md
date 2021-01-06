@@ -2,6 +2,7 @@
 ### Project stack
 * nodejs 14
 * postgres 13
+* minio RELEASE.2021-01-05T05-22-38Z
 
 ### The plan of deployment of dev environment
 1. In ./ create .env;
