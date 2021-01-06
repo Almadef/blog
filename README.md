@@ -9,7 +9,7 @@
 2. In ./docker/postgres create .env;
 3. In ./docker/pgadmin create .env;
 4. At the root of the code base, run the command `docker-compose up -d`;
-5. Look [app graphql](http://localhost:3000/graphql), [pgadmin](http://localhost:5050/).
+5. Look [app graphql](http://localhost:3000/graphql), [app swagger](http://localhost:3000/api), [pgadmin](http://localhost:5050/), [minio](http://localhost:9000/).
 
 ### Logs
 * Postgres logs can be viewed in ./docker/postgres/logs
