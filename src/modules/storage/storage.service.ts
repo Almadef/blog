@@ -18,65 +18,83 @@ export class StorageService {
     this.logger = new Logger('MinioStorageService');
   }
 
-  public async uploadSingle(image: BufferedFile) {
-    const uploaded_image = await this.upload(image);
+  public async uploadSingleImage(image: BufferedFile) {
+    const uploaded_image = await this.uploadImage(image);
 
     return {
       image_url: uploaded_image.url,
-      message: 'Successfully uploaded to MinIO S3',
+      message: 'Successfully uploaded image to MinIO S3',
     };
   }
 
-  public async uploadMany(files: BufferedFile) {
-    const image1 = files['image1'][0];
-    const uploaded_image1 = await this.upload(image1);
+  public async uploadPostImages(images: BufferedFile) {
+    const image_mobile_preview = images['image_mobile_preview'][0];
+    const uploaded_image_mobile_preview = await this.uploadImage(
+      image_mobile_preview,
+    );
 
-    const image2 = files['image2'][0];
-    const uploaded_image2 = await this.upload(image2);
+    const image_mobile_description = images['image_mobile_description'][0];
+    const uploaded_image_mobile_description = await this.uploadImage(
+      image_mobile_description,
+    );
+
+    const image_site_preview = images['image_site_preview'][0];
+    const uploaded_image_site_preview = await this.uploadImage(
+      image_site_preview,
+    );
+
+    const image_site_description = images['image_site_description'][0];
+    const uploaded_image_site_description = await this.uploadImage(
+      image_site_description,
+    );
 
     return {
-      image1_url: uploaded_image1.url,
-      image2_url: uploaded_image2.url,
-      message: 'Successfully uploaded mutiple image on MinioS3',
+      image_mobile_preview_url: uploaded_image_mobile_preview.url,
+      image_uploaded_image_mobile_description:
+        uploaded_image_mobile_description.url,
+      image_site_preview_url: uploaded_image_site_preview.url,
+      image_uploaded_image_site_description:
+        uploaded_image_site_description.url,
+      message: 'Successfully uploaded mutiple images for post on MinioS3',
     };
   }
 
-  private async upload(file: BufferedFile) {
-    if (!(file.mimetype.includes('jpeg') || file.mimetype.includes('png'))) {
-      throw new HttpException('Error uploading file', HttpStatus.BAD_REQUEST);
+  private async uploadImage(image: BufferedFile) {
+    if (!(image.mimetype.includes('jpeg') || image.mimetype.includes('png'))) {
+      throw new HttpException('Error uploading image', HttpStatus.BAD_REQUEST);
     }
-    const temp_filename = Date.now().toString();
-    const hashedFileName = crypto
+    const tempImageName = Date.now().toString();
+    const hashedImageName = crypto
       .createHash('md5')
-      .update(temp_filename)
+      .update(tempImageName)
       .digest('hex');
-    const ext = file.originalname.substring(
-      file.originalname.lastIndexOf('.'),
-      file.originalname.length,
+    const ext = image.originalname.substring(
+      image.originalname.lastIndexOf('.'),
+      image.originalname.length,
     );
     const metaData = {
-      'Content-Type': file.mimetype,
+      'Content-Type': image.mimetype,
       'X-Amz-Meta-Testing': 1234,
     };
-    const filename = hashedFileName + ext;
-    const fileName = `${filename}`;
-    const fileBuffer = file.buffer;
+    const imagename = hashedImageName + ext;
+    const imageName = `${imagename}`;
+    const imageBuffer = image.buffer;
     this.client.putObject(
       this.configs.bucketName,
-      fileName,
-      fileBuffer,
+      imageName,
+      imageBuffer,
       metaData,
       function (err) {
         if (err)
           throw new HttpException(
-            'Error uploading file',
+            'Error uploading image',
             HttpStatus.BAD_REQUEST,
           );
       },
     );
 
     return {
-      url: `${this.configs.publicUrl}:${this.configs.publicPort}/${this.configs.bucketName}/${filename}`,
+      url: `${this.configs.publicUrl}:${this.configs.publicPort}/${this.configs.bucketName}/${imagename}`,
     };
   }
 
