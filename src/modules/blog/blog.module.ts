@@ -3,11 +3,12 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoryRepository } from './repositories/category.repository';
 import { TagRepository } from './repositories/tag.repository';
-import { PostRepository } from './repositories/post.tepository';
+import { PostRepository } from './repositories/post.repository';
 import { CommandHandlers } from './commands/handles';
 import { QueryHandlers } from './queries/handlers';
 import { CategoryResolver } from './resolvers/category.resolve';
 import { TagResolver } from './resolvers/tag.resolve';
+import { PostResolver } from './resolvers/post.resolve';
 
 @Module({
   imports: [
@@ -18,10 +19,11 @@ import { TagResolver } from './resolvers/tag.resolve';
       PostRepository,
     ]),
   ],
-  exports: [TypeOrmModule, CategoryResolver, TagResolver],
+  exports: [TypeOrmModule, CategoryResolver, TagResolver, PostResolver],
   providers: [
     CategoryResolver,
     TagResolver,
+    PostResolver,
     ...CommandHandlers,
     ...QueryHandlers,
   ],

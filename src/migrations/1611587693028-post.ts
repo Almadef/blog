@@ -48,21 +48,25 @@ export class post1611587693028 implements MigrationInterface {
             name: 'image_mobile_preview',
             type: 'varchar',
             length: '200',
+            isNullable: true,
           },
           {
             name: 'image_mobile_description',
             type: 'varchar',
             length: '200',
+            isNullable: true,
           },
           {
             name: 'image_site_preview',
             type: 'varchar',
             length: '200',
+            isNullable: true,
           },
           {
             name: 'image_site_description',
             type: 'varchar',
             length: '200',
+            isNullable: true,
           },
           {
             name: 'meta_description',

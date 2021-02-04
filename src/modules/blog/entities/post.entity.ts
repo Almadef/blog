@@ -59,9 +59,6 @@ export class PostEntity extends EntityBase {
   })
   meta_keywords: string;
 
-  @Column('integer', { name: 'category_id' })
-  categoryId: number;
-
   @ManyToOne(() => CategoryEntity, (category) => category.id, {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',

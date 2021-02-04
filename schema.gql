@@ -71,6 +71,15 @@ type Mutation {
   """Update category"""
   categoryUpdate(args: CategoryUpdateDto!, categoryId: Float!): CategoryOneDto!
 
+  """Create post"""
+  postCreate(args: PostCreateDto!): PostOneDto!
+
+  """Delete post"""
+  postDelete(postId: Float!): StdResponseDto!
+
+  """Update post"""
+  postUpdate(args: PostUpdateDto!, postId: Float!): PostOneDto!
+
   """Create tag"""
   tagCreate(args: TagCreateDto!): TagOneDto!
 
@@ -79,6 +88,45 @@ type Mutation {
 
   """Update tag"""
   tagUpdate(args: TagUpdateDto!, tagId: Float!): TagOneDto!
+}
+
+input PostCreateDto {
+  categoryId: Float!
+  description: String!
+  image_mobile_description: String
+  image_mobile_preview: String
+  image_site_description: String
+  image_site_preview: String
+  meta_description: String!
+  meta_keywords: String!
+  preview: String!
+  title: String!
+}
+
+type PostOneDto {
+  description: String!
+  id: Float!
+  image_mobile_description: String!
+  image_mobile_preview: String!
+  image_site_description: String!
+  image_site_preview: String!
+  meta_description: String!
+  meta_keywords: String!
+  preview: String!
+  title: String!
+}
+
+input PostUpdateDto {
+  categoryId: Float!
+  description: String!
+  image_mobile_description: String
+  image_mobile_preview: String
+  image_site_description: String
+  image_site_preview: String
+  meta_description: String!
+  meta_keywords: String!
+  preview: String!
+  title: String!
 }
 
 type Query {
