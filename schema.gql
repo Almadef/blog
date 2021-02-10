@@ -71,11 +71,20 @@ type Mutation {
   """Update category"""
   categoryUpdate(args: CategoryUpdateDto!, categoryId: Float!): CategoryOneDto!
 
+  """Add tag to post"""
+  postAddTag(postId: Float!, tagId: Float!): PostOneDto!
+
   """Create post"""
   postCreate(args: PostCreateDto!): PostOneDto!
 
+  """Del all tags to post"""
+  postDelAllTag(postId: Float!): PostOneDto!
+
   """Delete post"""
   postDelete(postId: Float!): StdResponseDto!
+
+  """Del tag to post"""
+  postDelTag(postId: Float!, tagId: Float!): PostOneDto!
 
   """Update post"""
   postUpdate(args: PostUpdateDto!, postId: Float!): PostOneDto!
@@ -106,10 +115,10 @@ input PostCreateDto {
 type PostOneDto {
   description: String!
   id: Float!
-  image_mobile_description: String!
-  image_mobile_preview: String!
-  image_site_description: String!
-  image_site_preview: String!
+  image_mobile_description: String
+  image_mobile_preview: String
+  image_site_description: String
+  image_site_preview: String
   meta_description: String!
   meta_keywords: String!
   preview: String!

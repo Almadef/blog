@@ -20,20 +20,20 @@ export class PostOneDto {
   description: string;
 
   @IsString()
-  @Field()
-  image_mobile_preview: string;
+  @Field({ nullable: true })
+  image_mobile_preview?: string;
 
   @IsString()
-  @Field()
-  image_mobile_description: string;
+  @Field({ nullable: true })
+  image_mobile_description?: string;
 
   @IsString()
-  @Field()
-  image_site_preview: string;
+  @Field({ nullable: true })
+  image_site_preview?: string;
 
   @IsString()
-  @Field()
-  image_site_description: string;
+  @Field({ nullable: true })
+  image_site_description?: string;
 
   @IsString()
   @Field()

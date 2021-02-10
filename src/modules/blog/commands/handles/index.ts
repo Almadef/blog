@@ -7,6 +7,9 @@ import { TagDeleteHandler } from './tag/tag-delete.handler';
 import { PostCreateHandler } from './post/post-create.handler';
 import { PostUpdateHandler } from './post/post-update.handler';
 import { PostDeleteHandler } from './post/post-delete.handler';
+import { PostAddTagHandler } from './post/post-add-tag.command';
+import { PostDelTagHandler } from './post/post-del-tag.command';
+import { PostDelAllTagHandler } from './post/post-del-all-tag.command';
 
 export const CommandHandlers = [
   CategoryCreateHandler,
@@ -18,4 +21,7 @@ export const CommandHandlers = [
   PostCreateHandler,
   PostUpdateHandler,
   PostDeleteHandler,
+  PostAddTagHandler,
+  PostDelTagHandler,
+  PostDelAllTagHandler,
 ];
