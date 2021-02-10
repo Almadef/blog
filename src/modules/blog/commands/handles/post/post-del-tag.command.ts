@@ -15,22 +15,22 @@ export class PostDelTagHandler implements ICommandHandler<PostDelTagCommand> {
   ) {}
 
   async execute(command: PostDelTagCommand): Promise<PostEntity> {
-    const post = await this.postRepository.findOne(command.postId);
+    const post = await this.postRepository.findOne(command.postId, {
+      relations: ['tags'],
+    });
 
     if (!post) {
       throw new Error(ErrorCodes.POST_NOT_FOUND);
     }
 
-    const tagToRemove = await this.tagRepository.findOne(command.tagId, {
-      relations: ['tags'],
-    });
+    const tagToRemove = await this.tagRepository.findOne(command.tagId);
 
     if (!tagToRemove) {
       throw new Error(ErrorCodes.TAG_NOT_FOUND);
     }
 
     post.tags = post.tags.filter((tag) => {
-      tag.id !== tagToRemove.id;
+      return tag.id !== tagToRemove.id;
     });
 
     try {
